@@ -491,6 +491,8 @@ def main():
             "docker",
             "run",
             "--rm",
+            "--user",
+            f"{os.getuid()}:{os.getgid()}",
             "-v",
             f"{os.getcwd()}:/var/task",
             "--platform",
