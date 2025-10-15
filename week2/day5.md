@@ -954,6 +954,7 @@ jobs:
         run: |
           terraform workspace select ${{ github.event.inputs.environment || 'dev' }}
           echo "cloudfront_url=$(terraform output -raw cloudfront_url)" >> $GITHUB_OUTPUT
+          echo "custom_domain_url=$(terraform output -raw custom_domain_url)" >> $GITHUB_OUTPUT
           echo "api_url=$(terraform output -raw api_gateway_url)" >> $GITHUB_OUTPUT
           echo "frontend_bucket=$(terraform output -raw s3_frontend_bucket)" >> $GITHUB_OUTPUT
 
@@ -973,6 +974,7 @@ jobs:
         run: |
           echo "✅ Deployment Complete!"
           echo "🌐 CloudFront URL: ${{ steps.deploy_outputs.outputs.cloudfront_url }}"
+          echo "🌐 Custom Domain URL: ${{ steps.deploy_outputs.outputs.custom_domain_url }}"
           echo "📡 API Gateway: ${{ steps.deploy_outputs.outputs.api_url }}"
           echo "🪣 Frontend Bucket: ${{ steps.deploy_outputs.outputs.frontend_bucket }}"
 ```
