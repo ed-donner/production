@@ -961,11 +961,12 @@ First, you need your S3 static website URL (not the bucket name):
 6. **Step 4 - Web Application Firewall (WAF):**
    - Select **Do not enable security protections** (saves $14/month)
    - Click **Next**
-7. **Step 5 - Settings:**
-   - Price class: **Use only North America and Europe** (to save costs)
-   - Default root object: `index.html`
-   - Click **Next**
 8. **Review** and click **Create distribution**
+7. **Step 5 - Update CloudFront Settings**
+   - In the **General** tab click **Edit**
+   - Mark Price Class: **Use only North America and Europe**
+   - Default root object: `index.html`
+   - Click **Save Changes**
 
 ### Step 3: Wait for Deployment
 
