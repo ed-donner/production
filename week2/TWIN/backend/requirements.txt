@@ -1,6 +1,5 @@
 fastapi
 uvicorn
-openai
 python-dotenv
 python-multipart
 boto3
