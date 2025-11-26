@@ -85,6 +85,12 @@ Leave this server running, and open a new Terminal in Cursor, and send in a mess
 
 `curl -X POST http://localhost:8080/invocations -H "Content-Type: application/json" -d '{"prompt": "Hello can you hear me??"}'`
 
+Or on a Windows PC if you don't have curl:
+
+```powershell
+Invoke-RestMethod -Uri "http://localhost:8080/invocations" -Method Post -Headers @{ "Content-Type" = "application/json" } -Body '{"prompt": "Hello can you hear me??"}'
+```
+
 ### Step 5 - deploy!
 
 Here is the big command - but also please see the super-valuable heads up from student Andy C. below.
