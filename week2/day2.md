@@ -853,11 +853,7 @@ After creation, configure CORS:
 
 1. Go to **API details** (or **Stages** → **$default**)
 2. Copy your **Invoke URL** (looks like: `https://abc123xyz.execute-api.us-east-1.amazonaws.com`)
-3. Test with curl or browser:
-
-```bash
-curl https://YOUR-API-ID.execute-api.us-east-1.amazonaws.com/health
-```
+3. Test with a browser by visiting: https://YOUR-API-ID.execute-api.us-east-1.amazonaws.com/health
 
 You should see: `{"status": "healthy", "use_s3": true}`
 

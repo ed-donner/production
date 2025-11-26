@@ -567,11 +567,7 @@ Wait for the update to complete. You should see output with `"LastUpdateStatus":
 
 ### Step 1: Test via API Gateway
 
-Test your API directly with curl:
-
-```bash
-curl https://YOUR-API-ID.execute-api.us-east-1.amazonaws.com/health
-```
+Test your API directly in the browser: https://YOUR-API-ID.execute-api.us-east-1.amazonaws.com/health
 
 You should see the Bedrock model in the response.
 
