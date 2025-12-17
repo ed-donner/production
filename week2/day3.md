@@ -575,8 +575,10 @@ You should see the Bedrock model in the response.
 
 1. Visit your CloudFront URL: `https://YOUR-DISTRIBUTION.cloudfront.net`
 2. Start a conversation with your twin
-3. Test that the chat is working properly
+3. Test that the chat is working properly - if you get a reply "Sorry, I encountered an error. Please try again" then see below.  
 4. Verify that responses are coming through successfully
+
+If your twin replies "Sorry, I encountered an error. Please try again" then you may be receiving an error from the server. See the Browser's Javascript Console and you'll probably see a 500 error from the server. If it's a Bedrock error, then try adding the "us." or "eu." prefix to the model name, like us.amazon.nova-lite-v1:0  or eu.amazon.nova-lite-v1:0.
 
 ## Part 7: CloudWatch Monitoring
 
