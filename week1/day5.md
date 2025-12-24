@@ -684,7 +684,7 @@ The push will take 2-5 minutes depending on your internet speed.
    - Protocol: **HTTP**
    - Path: `/health`
    - Interval: `20` seconds (maximum allowed)
-   - Timeout: `5` seconds
+   - Timeout: `20` seconds
    - Healthy threshold: `2`
    - Unhealthy threshold: `5`
 
