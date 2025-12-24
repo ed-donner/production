@@ -413,7 +413,7 @@ FROM python:3.12-slim
 WORKDIR /app
 
 # Install Python dependencies
-COPY requirements.txt .
+COPY api/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the FastAPI server
@@ -684,7 +684,7 @@ The push will take 2-5 minutes depending on your internet speed.
    - Protocol: **HTTP**
    - Path: `/health`
    - Interval: `20` seconds (maximum allowed)
-   - Timeout: `5` seconds
+   - Timeout: `20` seconds
    - Healthy threshold: `2`
    - Unhealthy threshold: `5`
 
