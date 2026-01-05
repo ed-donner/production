@@ -1,0 +1,16 @@
+## Added Section Level Editing
+## Consultation Assistant – Section-Level Editing
+## Repo: https://github.com/adityabhuwania/saas
+
+1. **Full Summary Generation**  
+   - `Generate Summary` streams the AI response from `/api/consultation`.  
+   - The frontend parses the markdown headings (`### Summary…`, `### Next steps…`, `### Draft email…`) and fills each editor (Summary, Next Steps, Email) independently.
+
+2. **Editable Sections**  
+   - Each section renders its own editor card with two fields:  
+     - `Assistant notes`: add tone tweaks, constraints, or clarifications.  
+     - `Editable content`: freeform text area that holds the current version of that section.
+
+3. **Targeted Regeneration**  
+   - Clicking `Regenerate section` calls `/api/consultation` with `section`, `instruction`, and the `current_section` text.  
+   - FastAPI/OpenAI respond with *only* the requested heading; the UI replaces that section while preserving the other two.

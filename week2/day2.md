@@ -853,11 +853,7 @@ After creation, configure CORS:
 
 1. Go to **API details** (or **Stages** → **$default**)
 2. Copy your **Invoke URL** (looks like: `https://abc123xyz.execute-api.us-east-1.amazonaws.com`)
-3. Test with curl or browser:
-
-```bash
-curl https://YOUR-API-ID.execute-api.us-east-1.amazonaws.com/health
-```
+3. Test with a browser by visiting: https://YOUR-API-ID.execute-api.us-east-1.amazonaws.com/health
 
 You should see: `{"status": "healthy", "use_s3": true}`
 
@@ -971,7 +967,7 @@ First, you need your S3 static website URL (not the bucket name):
 
 CloudFront takes 5-15 minutes to deploy globally. Status will change from "Deploying" to "Enabled".
 
-### Step 4: Update CORS Settings
+### Step 4: Update CORS Settings - <span style="color:#dd2222;">AND PLEASE SEE MY APPEAL WITH ITEM 3 BELOW!!</span>
 
 While waiting for CloudFront to deploy, update your Lambda to accept requests from CloudFront:
 
@@ -983,7 +979,17 @@ While waiting for CloudFront to deploy, update your Lambda to accept requests fr
    - Current value: `*`
    - New value: `https://YOUR-CLOUDFRONT-DOMAIN.cloudfront.net`
    - Example: `https://d1234abcd.cloudfront.net`
+   - <span style="color:#dd2222;">REALLY IMPORTANT - you need to be SUPER careful with this. This URL needs to be correct. If not, you will waste HOURS trying to debug weird errors, and you will get irritated, and you'll send me angry messages in Udemy 😂. To avoid that - please get this URL right!! It needs to start with "https://". It must not have a trailing "/". It needs to look just like the example above.<span>
 4. Click **Save**
+
+
+### <span style="color:#dd2222;">Now say out loud:</span>  
+
+- Yes, Ed, I set the CORS_ORIGINS environment variable correctly  
+- Yes, Ed, it matches the Cloudfront URL, it includes `https://` at the start, and there's no `/` at the end, and it looks just like the example  
+- Yes, Ed, I checked it twice..
+
+Thank you!
 
 This allows your Lambda function to accept requests only from your CloudFront distribution, improving security.
 
@@ -1021,7 +1027,7 @@ This allows your Lambda function to accept requests only from your CloudFront di
 
 If you see CORS errors in browser console:
 
-1. Verify Lambda environment variable `CORS_ORIGINS` includes your CloudFront URL
+1. Verify Lambda environment variable `CORS_ORIGINS` includes your CloudFront URL with "https://" at the start and no trailing "/" - THIS MUST BE PRECISELY RIGHT!  
 2. Check API Gateway CORS configuration
 3. Make sure OPTIONS route is configured
 4. Clear browser cache and try incognito mode

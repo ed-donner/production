@@ -28,11 +28,9 @@ A **Business Idea Generator** - an AI-powered SaaS application that:
 3. Navigate to your projects folder (or wherever you want to create the project)
 4. Create a new Next.js project with TypeScript:
 
-**NOTE: Slight change from the videos. I'm pinning the version of NextJS to 15.5.6 in this command. In Oct 2025 they released verion 16.0.0, but it seems some of the libraries we will use are not yet compatible so we'll stick with 15.5.6 for now.**
-
 
 ```bash
-npx create-next-app@15.5.6 saas --typescript
+npx create-next-app saas --typescript
 ```
 
 When prompted, respond to each question:
