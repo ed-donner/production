@@ -104,35 +104,7 @@ That last entry was a catch by student Andy C (thanks once again Andy) - without
 1. Sign out from the root account
 2. Sign back in as `aiengineer` with your IAM credentials
 
-## Part 2: Request Access to Nova Models
-
-### Step 1: Navigate to Bedrock
-
-1. In AWS Console, search for **Bedrock**
-2. Click **Amazon Bedrock** service
-3. Make sure you're in the same region as your Lambda (check top-right corner)
-
-### Step 2: Request Model Access
-
-1. In the left sidebar, click **Model access** (under Foundation models)
-2. Click **Manage model access** or **Enable specific models** button
-3. Find the **Amazon** section
-4. Check the boxes for these models. _Note that you might need to change region (top right) if these models aren't available._  
-   - ✅ Nova Micro
-   - ✅ Nova Lite  
-   - ✅ Nova Pro
-5. Scroll to the bottom and click **Request model access**
-6. Click **Submit**
-
-### Step 3: Verify Access
-
-Access is typically granted immediately for Nova models:
-
-1. Refresh the page
-2. You should see **Access granted** status for all three Nova models
-3. If not, wait 1-2 minutes and refresh again
-
-## Part 3: Understanding Model Costs
+## Part 2: Understanding Model Costs
 
 ### Nova Model Pricing
 
@@ -152,7 +124,7 @@ The pricing page will show you:
 
 Generally, Nova Micro and Lite are very cost-effective options for most conversational AI use cases.
 
-## Part 4: Update Your Code for Bedrock
+## Part 3: Update Your Code for Bedrock
 
 ### Step 1: Update Requirements
 
@@ -418,7 +390,7 @@ if __name__ == "__main__":
 4. **Model selection via environment variable** - Easy to switch between Nova models
 5. **Better error handling** - Specific handling for Bedrock errors
 
-## Part 5: Deploy to Lambda
+## Part 4: Deploy to Lambda
 
 ### Step 1: Update Lambda Environment Variables
 
@@ -563,7 +535,7 @@ Wait for the update to complete. You should see output with `"LastUpdateStatus":
 }
 ```
 
-## Part 6: Test Your Bedrock-Powered Twin
+## Part 5: Test Your Bedrock-Powered Twin
 
 ### Step 1: Test via API Gateway
 
@@ -580,7 +552,7 @@ You should see the Bedrock model in the response.
 
 If your twin replies "Sorry, I encountered an error. Please try again" then you may be receiving an error from the server. See the Browser's Javascript Console and you'll probably see a 500 error from the server. If it's a Bedrock error, then try adding the "us." or "eu." prefix to the model name, like us.amazon.nova-lite-v1:0  or eu.amazon.nova-lite-v1:0.
 
-## Part 7: CloudWatch Monitoring
+## Part 6: CloudWatch Monitoring
 
 Now let's set up monitoring to track your Bedrock usage and Lambda performance.
 
@@ -673,7 +645,7 @@ Monitor your AWS costs:
 5. Enter your email for notifications
 6. Click **Create budget**
 
-## Part 8: Performance Comparison (Optional)
+## Part 7: Performance Comparison (Optional)
 
 ### Test Different Models
 
