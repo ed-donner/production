@@ -1201,7 +1201,7 @@ If Route 53 didn't auto-create a hosted zone:
 
 ### Step 3: Create Production Configuration
 
-Create `terraform/prod.tfvars`:
+Create ć
 
 ```hcl
 project_name             = "twin"
@@ -1347,6 +1347,16 @@ aws cloudfront list-distributions --query "DistributionList.Items[?Comment=='twi
 # Create invalidation
 aws cloudfront create-invalidation --distribution-id YOUR_ID --paths "/*"
 ```
+### Bedrock validation errors
+**"Nova models are designed to be used through cross region inference"**
+- You need to change the bedrock_model_id variable in your `terraform/terraform.tfvars` to use the Inference Profile ID for your specific region.
+
+| If your AWS Region is...  | Use this Model ID instead |
+| ------------- |:-------------:|
+| US East (N. Virginia)    | us.amazon.nova-micro-v1:0   |
+| US West (Oregon)      | us.amazon.nova-micro-v1:0    |
+| Europe (Frankfurt)     | eu.amazon.nova-micro-v1:0    |
+
 
 ## Best Practices
 
