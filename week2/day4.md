@@ -1201,7 +1201,7 @@ If Route 53 didn't auto-create a hosted zone:
 
 ### Step 3: Create Production Configuration
 
-Create ć
+Create `terraform/prod.tfvars`:
 
 ```hcl
 project_name             = "twin"
