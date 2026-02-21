@@ -4,38 +4,6 @@
 
 Welcome to Day 3! Today, we're making a significant architectural shift - replacing OpenAI with AWS Bedrock for AI responses. This change brings several advantages: lower latency (requests stay within AWS), potential cost savings, and deeper integration with AWS services. You'll learn how enterprise applications leverage cloud-native AI services for production deployments.
 
-## HEADS UP: Something important to watch out for -
-
-In Bedrock, models aren't always available in every region.  
-When you're choosing the model to use below, it's possible that you'll need to change the region (top right of the console) to either `us-west-2` or `us-east-1` to find the model you want. You'll need to match that AWS region in the code.  
-Remember to change the region back to your local region when looking at other AWS services. The Bedrock model doesn't need to run in the same region as the rest of your infrastructure..
-
-Thank you to Andy C (again) for making this important point!
-
-## Another important heads up:
-
-## Bedrock, model names, regions and inference profiles - please read
-
-During this project, we will use Bedrock model ids like this:  
-`amazon.nova-lite-v1:0`
-
-Depending on which region you're running in, and the Bedrock region, this might give you an error. You might find that you need to use something called an "inference profile", particularly if your default region is different to the Bedrock region. It's an easy change: you just change your Bedrock model id to have a prefix like this:
-
-`us.amazon.nova-lite-v1:0`  
-or
-`eu.amazon.nova-lite-v1:0`  
-(people in AP should be fine to use either)
-
-So if you have a Bedrock error, please try adding the "us." or "eu." prefix! Thank you to Susan M. for pointing this out.
-
-AND there's one additional technicality associated with this! This is quite a bore, but when you use these "inference profiles", you need to ensure that you have permission to access the model in all the related Bedrock Regions, from the Bedrock screens that we cover today.
-
-So if you choose `us.amazon.nova-lite-v1:0` then you need permission to access Nova models in each of: us-east-1, us-east-2, us-west-2
-
-And if you choose `eu.amazon.nova-lite-v1:0` then you need permission to access Nova models in each of: eu-central-1, eu-north-1, eu-west-1, eu-west-3
-
-Phew! If you don't request the relevant Bedrock regions, then you may see a permissions error at some point, and you'd need to come to Bedrock in the console and fix this. Quite tiresome!
-
 ## What You'll Learn Today
 
 - **AWS Bedrock fundamentals** - Amazon's managed AI service
@@ -104,33 +72,36 @@ That last entry was a catch by student Andy C (thanks once again Andy) - without
 1. Sign out from the root account
 2. Sign back in as `aiengineer` with your IAM credentials
 
-## Part 2: Request Access to Nova Models
+## Part 2: Request Access to Nova Models - THIS HAS CHANGED! PLEASE READ CAREFULLY.
 
-### Step 1: Navigate to Bedrock
+**VERY IMPORTANT HEADS UP - Amazon Bedrock models, quotas and inference profiles**
 
-1. In AWS Console, search for **Bedrock**
-2. Click **Amazon Bedrock** service
-3. Make sure you're in the same region as your Lambda (check top-right corner)
+As of 2026, AWS has changed its approach for model access:
 
-### Step 2: Request Model Access
+1. You no longer need to request access for models
+2. AWS now has a quota-based system for how much you can use each model; sometimes you need to request quotas
+3. Model names have changed
 
-1. In the left sidebar, click **Model access** (under Foundation models)
-2. Click **Manage model access** or **Enable specific models** button
-3. Find the **Amazon** section
-4. Check the boxes for these models. _Note that you might need to change region (top right) if these models aren't available._  
-   - ✅ Nova Micro
-   - ✅ Nova Lite  
-   - ✅ Nova Pro
-5. Scroll to the bottom and click **Request model access**
-6. Click **Submit**
+In the videos, I use Bedrock model ids like this:   
+`amazon.nova-lite-v1:0`  
 
-### Step 3: Verify Access
+There are 2 problems with this:  
+1. Nova has now updated to version 2: `amazon.nova-2-lite-v1:0`  
+2. It is better to use a different kind of model name known as a "cross-region inference profile" that contains a prefix, like `global.amazon.nova-2-lite-v1:0`
 
-Access is typically granted immediately for Nova models:
+When you use a cross-region inference profile, you're telling Bedrock that it can pick the region to use. That typically has higher quotas and less approvals.
 
-1. Refresh the page
-2. You should see **Access granted** status for all three Nova models
-3. If not, wait 1-2 minutes and refresh again
+You should start with the global one: `global.amazon.nova-2-lite-v1:0`  
+And if that has quotas, you should try a geography specific one:  
+`us.amazon.nova-lite-v1:0`  
+`eu.amazon.nova-lite-v1:0`  
+`ap.amazon.nova-lite-v1:0`
+
+You may also need to change your Bedrock Region if you get issues. A safe choice is `us-east-1`. It doesn't need to match the region of your other services like lambda.
+
+If you have any problems with this, or need to check or request quota, please see my [full write-up in Q42 here](https://edwarddonner.com/faq).
+
+For now, you don't need to do anything - just stick with `global.amazon.nova-2-lite-v1:0` and watch out for any quota issues.
 
 ## Part 3: Understanding Model Costs
 
@@ -203,19 +174,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Initialize Bedrock client
+# Initialize Bedrock client - see Q42 on https://edwarddonner.com/faq if the Region gives you problems
 bedrock_client = boto3.client(
     service_name="bedrock-runtime", 
     region_name=os.getenv("DEFAULT_AWS_REGION", "us-east-1")
 )
 
-# Bedrock model selection
-# Available models:
-# - amazon.nova-micro-v1:0  (fastest, cheapest)
-# - amazon.nova-lite-v1:0   (balanced - default)
-# - amazon.nova-pro-v1:0    (most capable, higher cost)
-# Remember the Heads up: you might need to add us. or eu. prefix to the below model id
-BEDROCK_MODEL_ID = os.getenv("BEDROCK_MODEL_ID", "amazon.nova-lite-v1:0")
+# Bedrock model selection - see Q42 on https://edwarddonner.com/faq for more
+BEDROCK_MODEL_ID = os.getenv("BEDROCK_MODEL_ID", "global.amazon.nova-2-lite-v1:0")
 
 # Memory storage configuration
 USE_S3 = os.getenv("USE_S3", "false").lower() == "true"
@@ -291,14 +257,15 @@ def call_bedrock(conversation: List[Dict], user_message: str) -> str:
     # Build messages in Bedrock format
     messages = []
     
-    # Add system prompt as first user message (Bedrock convention)
+    # Add system prompt as first user message
+    # Or there's a better way to do this - pass in system=[{"text": prompt()}] to the converse call below
     messages.append({
         "role": "user", 
         "content": [{"text": f"System: {prompt()}"}]
     })
     
-    # Add conversation history (limit to last 10 exchanges to manage context)
-    for msg in conversation[-20:]:  # Last 10 back-and-forth exchanges
+    # Add conversation history (limit to last 25 exchanges)
+    for msg in conversation[-50:]:
         messages.append({
             "role": msg["role"],
             "content": [{"text": msg["content"]}]
