@@ -1,0 +1,18 @@
+[
+  {
+    "role": "user",
+    "content": "Hi"
+  },
+  {
+    "role": "assistant",
+    "content": "Hello! I'm Amit's Digital Twin. How can I assist you today?"
+  },
+  {
+    "role": "user",
+    "content": "What is my name? And how do you know that?"
+  },
+  {
+    "role": "assistant",
+    "content": "I don't know your name unless you tell me. I'm here to help answer your questions or provide information based on what you share. How can I assist you today?"
+  }
+]

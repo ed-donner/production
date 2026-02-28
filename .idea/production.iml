@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="PYTHON_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/Demos/INSTANT/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/Demos/INSTANT/.venv" />
+      <excludeFolder url="file://$MODULE_DIR$/Demos/INSTANT/.vercel" />
+      <excludeFolder url="file://$MODULE_DIR$/week1/saas/.next" />
+      <excludeFolder url="file://$MODULE_DIR$/week1/saas/.vercel" />
+      <excludeFolder url="file://$MODULE_DIR$/week1/saas/node_modules" />
+      <excludeFolder url="file://$MODULE_DIR$/week2/TWIN/backend/.venv/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/week2/TWIN/backend/.venv/lib" />
+      <excludeFolder url="file://$MODULE_DIR$/week2/TWIN/frontend/.next" />
+      <excludeFolder url="file://$MODULE_DIR$/week2/TWIN/frontend/node_modules" />
+      <excludeFolder url="file://$MODULE_DIR$/week2/TWIN/frontend/out" />
+    </content>
+    <orderEntry type="jdk" jdkName="Python 3.11" jdkType="Python SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
