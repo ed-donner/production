@@ -45,10 +45,25 @@ You'll see the Clerk dashboard with your API keys displayed.
 
 ### Step 3: Install Clerk Dependencies
 
-In your terminal, install the Clerk SDK:
+In your terminal, install the Clerk SDK of v6 like `6.39.0`:
 
 ```bash
-npm install @clerk/nextjs
+npm install @clerk/nextjs@6.39.0
+```
+
+The latest `@clerk/nextjs` version as of Mar 6, 2026 is 7.0.1.  The version 7.0.1 removed `SignedIn` and `SignedOut` calls that are required in the `page/index.tsx` of our `saas` project.  If you have already installed the latest `@clerk/nextjs` and saw the error `those components are not found` shown in red underlined, please confirm the version installed with the following first line and you should see the result as expected
+
+```bash
+npm list @clerk/nextjs
+saas@0.1.0 /Users/threecuptea/workspace/saas
+└── @clerk/nextjs@7.0.1
+```
+
+Suggest: unistall the latest and install the version 6.39.0
+
+```bash
+npm uninstall @clerk/nextjs
+npm install @clerk/nextjs@6.39.0
 ```
 
 For handling streaming with authentication, also install:
