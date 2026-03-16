@@ -934,10 +934,13 @@ First, you need your S3 static website URL (not the bucket name):
 
 1. In AWS Console, search for **CloudFront**
 2. Click **Create distribution**
-3. **Step 1 - Origin:**
+3. You will be prompted to 'Choose a plan'.  Scroll to the bottom and choose **Pay as you go**.
+
+   IMPORTANT: DO NOT choose the 'free' plan. You won't be able to delete the distribution created until you cancel the subscription and wait for the end of billing cycle. It's a trap!!  
+4. **Step 1 - Origin:**
    - Distribution name: `twin-distribution`
    - Click **Next**
-4. **Step 2 - Add origin:**
+5. **Step 2 - Add origin:**
    - Choose origin: Select **Other** (not Amazon S3!)
    - Origin domain name: Paste your S3 website endpoint WITHOUT the http://
      - Example: `twin-frontend-xxx.s3-website-us-east-1.amazonaws.com`
@@ -947,21 +950,21 @@ First, you need your S3 static website URL (not the bucket name):
    - Origin name: `s3-static-website` (or leave auto-generated)
    - Leave other settings as default
    - Click **Add origin**
-5. **Step 3 - Default cache behavior:**
+6. **Step 3 - Default cache behavior:**
    - Path pattern: Leave as `Default (*)`
    - Origin and origin groups: Select your origin
    - Viewer protocol policy: **Redirect HTTP to HTTPS**
    - Allowed HTTP methods: **GET, HEAD**
    - Cache policy: **CachingOptimized**
    - Click **Next**
-6. **Step 4 - Web Application Firewall (WAF):**
+7. **Step 4 - Web Application Firewall (WAF):**
    - Select **Do not enable security protections** (saves $14/month)
    - Click **Next**
-7. **Step 5 - Settings:**
+8. **Step 5 - Settings:**
    - Price class: **Use only North America and Europe** (to save costs)
    - Default root object: `index.html`
    - Click **Next**
-8. **Review** and click **Create distribution**
+9. **Review** and click **Create distribution**
 
 ### Step 3: Wait for Deployment
 
