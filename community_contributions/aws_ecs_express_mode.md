@@ -1,4 +1,4 @@
-# Deploying a container for AWS ECS Express Mode
+# Deploying a container to AWS ECS Express Mode
 
 ## Problem
 The Week 1 Day 5 instructions say to use AWS App Runner to deploy the container. Unfortunately, AWS has deprecated App Runner and suggests
@@ -12,7 +12,7 @@ using ECS Express Mode as a replacement. ECS Express Mode is not as straightforw
 2. Create a default VPC using the AWS CLI. (I did this from the terminal in cursor.)
 - `aws ec2 create-default-vpc`
 
-3. As the aiengineer user, create an ECS Express Mode deployment. Kept defaults except for:
+3. As the aiengineer user, create an ECS Express Mode deployment. Keep defaults except for:
 - Image URI (Use the Browse ECR images button to select image.)
 - Container port: 8000
 - Container health check path: /health
