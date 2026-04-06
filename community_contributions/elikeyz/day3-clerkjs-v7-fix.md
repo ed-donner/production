@@ -91,7 +91,7 @@ Open `.gitignore` in Cursor and add `.env.local` on a new line.
 
 With Pages Router, we need to wrap our application with the Clerk provider. Update `pages/_app.tsx`:
 
-```typescript
+```tsx
 import { ClerkProvider } from '@clerk/nextjs';
 import type { AppProps } from 'next/app';
 import '../styles/globals.css';
@@ -111,7 +111,7 @@ Move your business idea generator to a protected route. Since we're using client
 
 Create `pages/product.tsx`:
 
-```typescript
+```tsx
 "use client"
 
 import { useEffect, useState } from 'react';
@@ -191,7 +191,7 @@ export default function Product() {
 
 Update `pages/index.tsx` to be your new landing page with sign-in:
 
-```typescript
+```tsx
 "use client"
 
 import Link from 'next/link';
@@ -266,7 +266,7 @@ First, get your JWKS URL from Clerk:
 
 1. Go to your Clerk Dashboard
 2. Click **Configure** (top nav)
-3. Click **API Keys** (side nav)  
+3. Click **API Keys** (side nav)
 4. Find **JWKS URL** and copy it
 
 **What is JWKS?** The JWKS (JSON Web Key Set) URL is a public endpoint that contains Clerk's public keys. When a user signs in, Clerk creates a JWT (JSON Web Token) - a digitally signed token that proves the user's identity. Your Python backend uses the JWKS URL to fetch Clerk's public keys and verify that incoming JWT tokens are genuine and haven't been tampered with. This allows secure authentication without your backend needing to contact Clerk for every request - it can verify tokens independently using cryptographic signatures.
@@ -281,7 +281,7 @@ CLERK_JWKS_URL=your_jwks_url_here
 
 Add the Clerk authentication library to `requirements.txt`:
 
-```
+```txt
 fastapi
 uvicorn
 openai

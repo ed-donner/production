@@ -60,7 +60,7 @@ Since we're using Pages Router with client-side components, we need to protect o
 
 Update `pages/product.tsx`:
 
-```typescript
+```tsx
 "use client"
 
 import { useEffect, useState } from 'react';
@@ -173,7 +173,7 @@ Let's update the landing page to better reflect the subscription model.
 
 Update `pages/index.tsx`:
 
-```typescript
+```tsx
 "use client"
 
 import Link from 'next/link';
@@ -344,7 +344,7 @@ Your app now has:
 
 You can create multiple plans in Clerk Dashboard:
 
-```typescript
+```tsx
 <Protect
     plan={["basic_plan", "premium_plan", "enterprise_plan"]}
     fallback={<PricingTable />}
@@ -357,7 +357,7 @@ You can create multiple plans in Clerk Dashboard:
 
 Instead of Clerk's default PricingTable, you can build your own:
 
-```typescript
+```tsx
 <Protect
     plan="premium_subscription"
     fallback={<CustomPricingPage />}
