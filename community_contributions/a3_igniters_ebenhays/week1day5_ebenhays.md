@@ -19,7 +19,12 @@ An AI-powered web app that scores how well your resume matches a job description
 | Auth | Clerk |
 | Deployment | Vercel |
 
-## Getting Started
+## Project Repository
+https://github.com/ebenhays/ai-resume-analyser
+
+## Deployment URL
+https://25tuj4ktib.eu-central-1.awsapprunner.com
+
 
 ### Prerequisites
 
@@ -74,37 +79,25 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 ```
 resume-to-job/
 ├── app/
-│   ├── layout.tsx          # Root layout with Clerk provider and header
+│   ├── layout.tsx          # Root layout with ClerkProvider and header
 │   ├── page.tsx            # Main analyzer UI
 │   ├── globals.css
 │   └── components/
 │       └── CircularScore.tsx
 ├── api/
-│   ├── index.py            # FastAPI backend — PDF parsing + OpenAI call
-│   └── requirements.txt
-├── middleware.ts            # Clerk auth middleware
-├── vercel.json             # Vercel build + routing config
-└── next.config.ts
+│   └── server.py           # FastAPI backend — PDF parsing + OpenAI call
+├── proxy.ts                # Clerk auth middleware
+├── next.config.ts          # Standalone output + /api/* and /health rewrites
+├── requirements.txt        # Python dependencies
+├── Dockerfile              # Multi-stage build (frontend builder + runtime)
+├── start.sh                # Container entrypoint — starts FastAPI then Next.js
 ```
-
-## Deployment (Vercel)
-
-The project is configured for a hybrid Vercel deployment — Next.js for the frontend and a Python serverless function for the API.
-
-1. Push to GitHub and import the repo in [Vercel](https://vercel.com/).
-2. Add the three environment variables (`NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`, `CLERK_SECRET_KEY`, `OPENAI_API_KEY`) in the Vercel project settings.
-3. Deploy. The `vercel.json` handles routing `/api/*` requests to the Python function automatically.
 
 ## How It Works
 
-1. User signs in and uploads a PDF resume + pastes a job description.
-2. The frontend sends a `multipart/form-data` POST to `/api/analyze`.
-3. The FastAPI backend extracts text from the PDF using `pypdf`.
-4. The extracted text and job description are sent to GPT-4o with structured output parsing.
-5. The result (`match_score`, `missing_keywords`, `suggested_edits`) is returned as JSON and rendered in the UI.
-
-## Project Repository
-https://github.com/ebenhays/ai-resume-analyser
-
-## Test is out here
-https://ai-resume-analyser-gilt-phi.vercel.app
+1. User signs in via Clerk and uploads a PDF resume alongside a job description.
+2. The browser sends a `multipart/form-data` POST to `/api/analyze`.
+3. Next.js rewrites `/api/*` to the FastAPI sidecar running on `http://localhost:8001`.
+4. FastAPI extracts text from the PDF using `pypdf`.
+5. The text and job description are sent to GPT-4o with structured output parsing.
+6. The result (`match_score`, `missing_keywords`, `suggested_edits`) is returned as JSON and rendered in the UI.
