@@ -1,4 +1,4 @@
-# Week 1 – MediNotes Consultation Studio
+## MediNotes Consultation Studio
 
 I modificed the healthcare SaaS application into a solution that helps clinicians reduce documentation overhead while maintaining professional, consistent, and patient-friendly communication:
 
