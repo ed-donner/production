@@ -1,6 +1,12 @@
 # Week1 Exercise
 
-I added Add specialty selection and urgency level to the consultation form and enhanced the backend to use apprioprate prompt based on the specialty selected. Finally, I added the capability to Generate PDF from markdown and Copy email section to clipboard.
+I implemented the following:
+
+1. Specialty selection 
+2.  Urgency level to the consultation form 
+3.  Enhanced the backend to use apprioprate prompt based on the specialty selected. 
+4. Generate PDF from markdown 
+5.  Copy the generated Email section to the clipboard.
 
 # AWS App Runner deployment and GitHub Repo link
 
