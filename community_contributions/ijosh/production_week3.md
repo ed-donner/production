@@ -33,18 +33,6 @@ graph TB
     Ingest --> V
 ```
 
-<br/>
-
-## Core Features
-
-- Multi-agent orchestration with specialized responsibilities
-- Autonomous market research + ingestion pipeline
-- Cost-optimized vector search using S3 Vectors
-- Structured portfolio/job persistence in Aurora Serverless v2
-- Event-driven processing via SQS + Lambda
-- Production-ready deployment using Terraform per-guide modules
-- Cloud-native observability via CloudWatch/App Runner logs
-
 
 <br/>
 
