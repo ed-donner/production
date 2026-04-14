@@ -13,8 +13,8 @@ Bedrock integration.
 
 # AWS App Runner deployment and GitHub Repo link
 
-[My Digital Twin](https://d2tqpaebctwtf9.cloudfront.net//)
+[My Digital Twin](https://d2tqpaebctwtf9.cloudfront.net)
 
 [GitHub Link](https://github.com/nsikanikpoh/ai-saas-idea.git)
 
-[API Gateway](https://kuojtbwv61.execute-api.us-east-1.amazonaws.com/)
+[API Gateway](https://kuojtbwv61.execute-api.us-east-1.amazonaws.com)
