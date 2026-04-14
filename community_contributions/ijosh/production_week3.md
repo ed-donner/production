@@ -26,11 +26,10 @@
 
 ```mermaid
 graph TB
-    Reporter --> V[(S3 Vectors)]
     Researcher[Researcher Agent on App Runner] --> Bedrock[AWS Bedrock<br/>gpt-oss-120b]
     Researcher --> Ingest[Ingest Lambda + API Gateway]
     Ingest --> SageMaker[SageMaker Embeddings]
-    Ingest --> V
+    Ingest --> V[(S3 Vectors)]
 ```
 
 
