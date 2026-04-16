@@ -5,8 +5,8 @@ This project is an AI-powered SaaS (Software as a Service) platform designed to 
 
 ## Links
 
-- Repo: [https://github.com/dev-seun/saas.git](Repo)
-- Live app: [https://co-27e8d92962ac452fbbe9cede5a07c9fd.ecs.us-east-1.on.aws](https://co-91654536e40f4cae946ebaf30dabaff1.ecs.us-east-1.on.aws/)
+- Repo: [Repo]([Repo](https://github.com/dev-seun/saas.git))
+- Live app: [Project Link](https://co-91654536e40f4cae946ebaf30dabaff1.ecs.us-east-1.on.aws/)
 
 ## Features
  
