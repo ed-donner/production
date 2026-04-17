@@ -2,6 +2,7 @@
 
 **Student:** Stella Achar Oiro (Igniters cohort)  
 **Live demo:** https://zeya-antenatal.vercel.app  
+**API (AWS App Runner):** https://wmfu2qqpc5.us-east-1.awsapprunner.com/api/health  
 **Repo:** https://github.com/Stella-Achar-Oiro/zeya-antenatal
 
 ---
