@@ -11,7 +11,7 @@ This project is a digital twin application that represents a personalized AI ass
 ## Links
 
 * Repo: [https://github.com/dev-seun/digital-twin.git](https://github.com/dev-seun/digital-twin.git)
-* Live app: [https://co-27e8d92962ac452fbbe9cede5a07c9fd.ecs.us-east-1.on.aws](https://co-27e8d92962ac452fbbe9cede5a07c9fd.ecs.us-east-1.on.aws)
+* Live app: [https://d1qytargpb7km4.cloudfront.net](https://d1qytargpb7km4.cloudfront.net/)
 
 ---
 
