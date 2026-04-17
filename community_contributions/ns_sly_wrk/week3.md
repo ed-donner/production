@@ -20,4 +20,6 @@ Applied context engineering and a todo tracking tool to the Alex Researcher agen
 
 [Changes made to backend/researcher ](https://github.com/nsikanikpoh/researcher.git)
 
+[Service URL](https://syjmf28xcn.us-east-1.awsapprunner.com)
+
 
