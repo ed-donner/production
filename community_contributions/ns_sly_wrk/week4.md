@@ -16,7 +16,7 @@ Applied context engineering and todo tracking to the Financial Planner Orchestra
 
 # Links
 
-[Changes made to backend/planner ](https://github.com/nsikanikpoh/researcher.git)
+[Changes made to backend/planner ](https://github.com/nsikanikpoh/planner.git)
 
 [Service URL](https://dr2e6eecawq19.cloudfront.net)
 
