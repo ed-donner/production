@@ -1,6 +1,6 @@
-Alex Incident report sent to SQS
+# Cyber
 
-Created an incident report that send error stack and data to SQS. A Lambda function that picks it up and send incident report to a resolver via email
+Code analysis
 
 GitHub
-https://github.com/karosi12/AI-Alex
+https://github.com/karosi12/cyber
