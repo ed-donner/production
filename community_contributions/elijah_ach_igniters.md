@@ -7,4 +7,4 @@ A full-stack AI-powered consultation app deployed on two platforms.
 | Platform | URL |
 |---|---|
 | Vercel | https://saas-jet-seven-14.vercel.app/product |
-| AWS App Runner | https://yqzawsxiq3.us-east-1.awsapprunner.com/product |
+| AWS App Runner | https://yqzawsxiq3.us-east-1.awsapprunner.com/ |
