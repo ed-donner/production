@@ -1,0 +1,11 @@
+# Ignore everything in this specific directory
+/*
+
+# Do not ignore the README
+!/README.md
+
+# Do not ignore these config files
+!/.gitignore
+!/.vercelignore
+
+.vercel
