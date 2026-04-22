@@ -1,4 +1,4 @@
-# Alex — Digital Twin
+# Alex
 
 AI-powered financial advisor for portfolio management, retirement planning, personalized advice, and market tracking.
 
