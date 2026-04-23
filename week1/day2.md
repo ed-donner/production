@@ -26,11 +26,12 @@ A **Business Idea Generator** - an AI-powered SaaS application that:
 1. Open Cursor
 2. Open the terminal (Terminal → New Terminal or Ctrl+\` / Cmd+\`)
 3. Navigate to your projects folder (or wherever you want to create the project)
-4. Create a new Next.js project with TypeScript:
+4. Create a new Next.js project with TypeScript
 
+This command is a bit longer than the one I type in the video, to account for a recent change:  
 
 ```bash
-npx create-next-app saas --typescript
+npx create-next-app saas --ts --eslint --tailwind --no-src-dir --no-app
 ```
 
 When prompted, respond to each question:
