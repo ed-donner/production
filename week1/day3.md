@@ -400,7 +400,14 @@ npm install -D concurrently
 }
 ```
 
-Test your authentication locally:
+
+5. Add a LOCAL_API_ORIGIN variable to your .env.local:
+```bash
+LOCAL_API_ORIGIN=http://127.0.0.1:8000
+```
+
+
+6. Test your authentication locally:
 
 ```bash
 vercel dev
