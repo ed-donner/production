@@ -265,7 +265,7 @@ export default function Home() {
 First, get your JWKS URL from Clerk:
 1. Go to your Clerk Dashboard
 2. Click **Configure** (top nav)
-3. Click **API Keys** (side nav)  
+3. Click **API Keys** (side nav)
 4. Find **JWKS URL** and copy it
 
 **What is JWKS?** The JWKS (JSON Web Key Set) URL is a public endpoint that contains Clerk's public keys. When a user signs in, Clerk creates a JWT (JSON Web Token) - a digitally signed token that proves the user's identity. Your Python backend uses the JWKS URL to fetch Clerk's public keys and verify that incoming JWT tokens are genuine and haven't been tampered with. This allows secure authentication without your backend needing to contact Clerk for every request - it can verify tokens independently using cryptographic signatures.
@@ -349,13 +349,62 @@ Paste your JWKS URL and select all environments.
 
 ### Step 12: Test Locally
 
+The Vercel local development setup will not start the FastAPI server out of the box. This is currently a known issue. To work around this:
+
+1. Replace next.config.ts with:
+
+```python
+import type { NextConfig } from "next";
+
+const localApiOrigin = process.env.LOCAL_API_ORIGIN;
+
+const nextConfig: NextConfig = {
+  reactCompiler: true,
+  reactStrictMode: true,
+  async rewrites() {
+    if (!localApiOrigin) {
+      return [];
+    }
+
+    return [
+      {
+        source: "/api",
+        destination: `${localApiOrigin}/api`,
+      },
+    ];
+  },
+};
+
+export default nextConfig;
+
+```
+
+2. Add this to your package.json scripts section:
+
+```json
+"dev:api": "uv run uvicorn api.index:app --reload --port 8000",
+"dev:full": "LOCAL_API_ORIGIN=http://127.0.0.1:8000 concurrently \"npm run dev\" \"npm run dev:api\"",
+```
+
+3. Add 'concurrently' to your dev dependencies:
+
+```bash
+npm install -D concurrently
+```
+
+4. Create the following vercel.json file in the root of your project:
+
+```json
+{
+  "devCommand": "npm run dev:full"
+}
+```
+
 Test your authentication locally:
 
 ```bash
 vercel dev
 ```
-
-**Note:** The Python backend won't work locally with `vercel dev`, but the authentication flow will work perfectly! You'll be able to sign in, sign out, and see the user interface.
 
 Visit `http://localhost:3000` and:
 1. Click "Sign In"
