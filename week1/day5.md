@@ -12,6 +12,8 @@ The architecture from the videos still applies almost everywhere: you still buil
 
 If you are watching the videos alongside this guide: the section numbers below match the videos exactly. Where the contents of a section changed, you'll see the note **"This section is changed due to the AWS App Runner changes"** at the top of that section. Every other section follows the videos as-is.
 
+I've also recorded an extra video to highlight the approach covered here - here's a link to the video: https://youtu.be/aNYbZpLwBj0
+
 ---
 
 ## What You'll Learn
