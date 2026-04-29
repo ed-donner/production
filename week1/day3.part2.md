@@ -25,7 +25,7 @@ An enhanced version of your app that:
 1. Go to your [Clerk Dashboard](https://dashboard.clerk.com)
 2. Select your **SaaS** application
 3. Click **Configure** in the top navigation
-4. Click **Subscription Plans** in the left sidebar
+4. Click **Billing>>Subscription Plans** in the left sidebar
 5. Click **Get Started** if this is your first time
 
 ### Enable Billing

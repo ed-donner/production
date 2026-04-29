@@ -430,7 +430,7 @@ export default function Home() {
 
         {/* Trust Indicators */}
         <div className="text-center text-sm text-gray-500 dark:text-gray-400">
-          <p>HIPAA Compliant • Secure • Professional</p>
+          <p>For demonstration purposes only</p>
         </div>
       </div>
     </main>

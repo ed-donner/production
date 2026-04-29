@@ -51,20 +51,7 @@ In your terminal, install the Clerk SDK of v6 like `6.39.0`:
 npm install @clerk/nextjs@6.39.0
 ```
 
-The latest `@clerk/nextjs` version as of Mar 6, 2026 is 7.0.1.  The version 7.0.1 removed `SignedIn` and `SignedOut` calls that are required in the `page/index.tsx` of our `saas` project.  If you have already installed the latest `@clerk/nextjs` and saw the error `those components are not found` shown in red underlined, please confirm the version installed with the following first line and you should see the result as expected
-
-```bash
-npm list @clerk/nextjs
-saas@0.1.0 /Users/threecuptea/workspace/saas
-└── @clerk/nextjs@7.0.1
-```
-
-Suggest: unistall the latest and install the version 6.39.0
-
-```bash
-npm uninstall @clerk/nextjs
-npm install @clerk/nextjs@6.39.0
-```
+Side note: The latest `@clerk/nextjs` version as of Mar 6, 2026 is 7.0.1.  The version 7.0.1 removed `SignedIn` and `SignedOut` calls that are required in the `page/index.tsx` of our `saas` project.  If you have already installed the latest `@clerk/nextjs` and saw the error `those components are not found` shown in red underlined, please confirm the version installed with the following first line and you should see the result as expected.
 
 For handling streaming with authentication, also install:
 
@@ -81,7 +68,7 @@ NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_publishable_key_here
 CLERK_SECRET_KEY=your_secret_key_here
 ```
 
-**Important:** Copy these values from the Clerk dashboard (they're displayed after creating your application on the configure screen).
+**Important:** Copy these values from the Clerk dashboard (they're displayed after creating your application on the configure screen, in the API Keys section). Remember to save the .env.local file after changing it.
 
 ### Add to .gitignore
 
@@ -270,7 +257,7 @@ First, get your JWKS URL from Clerk:
 
 **What is JWKS?** The JWKS (JSON Web Key Set) URL is a public endpoint that contains Clerk's public keys. When a user signs in, Clerk creates a JWT (JSON Web Token) - a digitally signed token that proves the user's identity. Your Python backend uses the JWKS URL to fetch Clerk's public keys and verify that incoming JWT tokens are genuine and haven't been tampered with. This allows secure authentication without your backend needing to contact Clerk for every request - it can verify tokens independently using cryptographic signatures.
 
-Add to `.env.local`:
+Add to `.env.local` and save:
 ```bash
 CLERK_JWKS_URL=your_jwks_url_here
 ```
@@ -340,28 +327,14 @@ Paste your publishable key and select all environments.
 ```bash
 vercel env add CLERK_SECRET_KEY
 ```
-Paste your secret key and select all environments.
+Paste your secret key and select all environments except for development.
 
 ```bash
 vercel env add CLERK_JWKS_URL
 ```
-Paste your JWKS URL and select all environments.
+Paste your JWKS URL and select all environments except for development.
 
-### Step 12: Test Locally
-
-Test your authentication locally:
-
-```bash
-vercel dev
-```
-
-**Note:** The Python backend won't work locally with `vercel dev`, but the authentication flow will work perfectly! You'll be able to sign in, sign out, and see the user interface.
-
-Visit `http://localhost:3000` and:
-1. Click "Sign In"
-2. Create an account or sign in with Google/GitHub
-3. You'll be redirected to the landing page, now authenticated
-4. Click "Go to App" to access the protected idea generator
+### Step 12: (This step intentionally skipped - we will test after deployment)
 
 ### Step 13: Deploy to Production
 

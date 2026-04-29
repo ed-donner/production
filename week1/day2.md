@@ -26,20 +26,11 @@ A **Business Idea Generator** - an AI-powered SaaS application that:
 1. Open Cursor
 2. Open the terminal (Terminal → New Terminal or Ctrl+\` / Cmd+\`)
 3. Navigate to your projects folder (or wherever you want to create the project)
-4. Create a new Next.js project with TypeScript:
-
+4. Create a new Next.js project with TypeScript. This command is a bit longer than the one I type in the video, to account for a recent change:  
 
 ```bash
-npx create-next-app saas --typescript
+npx create-next-app saas --ts --eslint --tailwind --no-src-dir --no-app
 ```
-
-When prompted, respond to each question:
-1. **Which linter would you like to use?** → Press Enter for **ESLint** (default)
-2. **Would you like to use Tailwind CSS?** → Type `y` and press Enter for **Yes**
-3. **Would you like your code inside a `src/` directory?** → Type `n` and press Enter for **No**
-4. **Would you like to use App Router? (recommended)** → Type `n` and press Enter for **No** (we're using Pages Router)
-5. **Would you like to use Turbopack? (recommended)** → Type `n` and press Enter for **No** (we'll keep the standard build for compatibility)
-6. **Would you like to customize the import alias?** → Type `n` and press Enter for **No**
 
 This creates a new Next.js project with:
 - **Pages Router** (the stable, battle-tested routing system)
@@ -252,7 +243,7 @@ Now that the project is created, add your OpenAI API key:
 vercel env add OPENAI_API_KEY
 ```
 - Paste your API key when prompted
-- Select all environments (development, preview, production)
+- Select all environments except development (preview, production) and when prompted whether to mark it as sensitive, say 'yes'
 
 ## Step 7: Deploy and Test
 
@@ -283,6 +274,8 @@ Visit the URL provided to see your live application!
 Now let's enhance your app with real-time streaming and Markdown rendering.
 
 ### Install Markdown Libraries
+
+From the project root directory (saas):
 
 ```bash
 npm install react-markdown remark-gfm remark-breaks
@@ -401,7 +394,9 @@ Let's make your app look professional with modern styling.
 
 ### Fix Markdown Rendering
 
-First, we need to restore the default HTML styles that Tailwind removes. Add this to the bottom of your `styles/globals.css` file:
+First, we need to restore the default HTML styles that Tailwind removes. Add this to the bottom of your `styles/globals.css` file.
+
+**IMPORTANT NOTE** this is to be added to the bottom of the globals.css file - don't overwrite everything that's already there, or your existing styles will be removed..
 
 ```css
 @layer base {
@@ -554,7 +549,7 @@ export default function Home() {
 
 ## Step 9: Deploy Final Version
 
-Deploy your enhanced application:
+Deploy your enhanced application. If the styles don't look right, check that you didn't overwrite the old CSS with the new CSS in the instruction above..
 
 ```bash
 vercel --prod
