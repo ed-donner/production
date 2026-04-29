@@ -1,0 +1,6 @@
+# Ignore everything in this directory
+*
+
+# Except the documentation and this file
+!.gitignore
+!README.md
