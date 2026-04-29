@@ -1,6 +1,6 @@
 # Day 5: Deploy Your SaaS to AWS — Container on AWS Lambda
 
-## Important — Read This First (April 2026 Update)
+## Important — Read This First (April 2026 Update) - Change from App Runner
 
 **AWS has put App Runner into maintenance mode.** As of April 30, 2026, App Runner stopped accepting new customers. Existing customers can keep using it for now, but no new features are planned. The original videos for this lesson use App Runner — that path is no longer available to new students, so this document replaces those instructions.
 
