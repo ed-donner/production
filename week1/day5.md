@@ -498,7 +498,9 @@ docker build `
   -t consultation-app .
 ```
 
-This will take 2-3 minutes the first time.
+This will take 2-3 minutes the first time.  
+
+Windows people: if you get an error `The image manifest, config or layer media type for the source image [...] is not supported` then please go to Docker Desktop -> Settings -> General and make sure that "Use containerd for pulling and storing images checkbox" is NOT checked. Thank you Muhammad T. for this pro tip..
 
 ### Step 3: Run Locally
 
