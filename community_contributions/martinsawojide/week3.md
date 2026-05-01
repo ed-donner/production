@@ -1,0 +1,2 @@
+- **Azure Project Link:** https://cyber-analyzer.happyglacier-a1954487.eastus.azurecontainerapps.io/
+- **GCP Project Link:** https://cyber-analyzer-ecg52yfaza-ue.a.run.app/
