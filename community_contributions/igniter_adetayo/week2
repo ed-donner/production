@@ -1,0 +1,5 @@
+Built and deployed my digital twin using the Amazon nova model
+
+Production
+backend: https://tqqwu612gb.execute-api.us-east-1.amazonaws.com
+frontend: http://twin-frontend-300426.s3-website-us-east-1.amazonaws.com/
