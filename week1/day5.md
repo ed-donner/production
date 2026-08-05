@@ -610,6 +610,7 @@ aws ecr get-login-password --region $DEFAULT_AWS_REGION | docker login --usernam
 # 2. Build for Linux/AMD64 (CRITICAL for Apple Silicon Macs!)
 docker build \
   --platform linux/amd64 \
+  --provenance=false \
   --build-arg NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="$NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY" \
   -t consultation-app .
 
@@ -628,6 +629,7 @@ aws ecr get-login-password --region $env:DEFAULT_AWS_REGION | docker login --use
 # 2. Build for Linux/AMD64
 docker build `
   --platform linux/amd64 `
+  --provenance=false `
   --build-arg NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="$env:NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY" `
   -t consultation-app .
 
