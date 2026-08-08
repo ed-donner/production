@@ -1,0 +1,21 @@
+{
+  "full_name": "Your Full Name",
+  "name": "Your Nickname",
+  "current_role": "Your Current Role",
+  "location": "Your Location",
+  "email": "your.email@example.com",
+  "linkedin": "linkedin.com/in/yourprofile",
+  "specialties": [
+    "Your specialty 1",
+    "Your specialty 2",
+    "Your specialty 3"
+  ],
+  "years_experience": 10,
+  "education": [
+    {
+      "degree": "Your Degree",
+      "institution": "Your University",
+      "year": "2020"
+    }
+  ]
+}
