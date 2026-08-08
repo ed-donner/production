@@ -1,0 +1,9 @@
+# Ignore everything in this specific directory
+/*
+
+# Do not ignore the README and assets
+!/README.md
+!/assets/
+
+# Do not ignore these config files
+!/.gitignore
