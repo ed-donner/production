@@ -4,6 +4,7 @@ services:
     build:
       context: .
       target: backend
+      provenance: false
       args:
         - NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
     image: consultation-app

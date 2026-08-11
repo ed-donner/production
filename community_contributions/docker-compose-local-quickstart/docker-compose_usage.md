@@ -50,11 +50,16 @@ your project.
   ```yml
   build:
     context: .                    # Same period at the end of the command. (Current folder)
+    provenance: false             # To avoid Lambda reject image as not OCI compatible.
     target: backend               # Dockerfile target image for multistage ones.
     args:                         # Same one as on the command line.
       - NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
   image: consultation-app         # Same as on the command line.
   ```
+
+  On Windows or macOS, if Lambda still rejects the image, try setting
+  `BUILDX_NO_DEFAULT_ATTESTATIONS=1` environment variable on your session before the
+  build.
 
 <div class="page"/>
 
