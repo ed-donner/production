@@ -1,14 +1,21 @@
-# Docker Compose for easier local deployment and testing
+# Docker Compose: Local Quick Start
 
-* No need to preload terminal session with env vars, docker compose will get them from
-  the `.env` file.
+By [Carlos Bazaga](https://github.com/Carbaz)\
+*With GPT-5.6 Luna as assistant writer.*
 
-## Add image name to dockerfile
+Use Docker Compose to build and run the service locally without manually exporting
+environment variables in each terminal session. Compose loads them from `.env` by
+default.
 
-To be able to aim docker compose to the right image we should add a name to the final
-image on our `Dockerfile`:
+For extra protection, store `.env` in a separate folder outside the workspace, such as
+one level above the project. This keeps secrets out of version control and away from
+AI agents or other tools that scan the workspace.
 
-Change:
+## Name the Dockerfile Stage
+
+Give the final image stage a name so Compose can target it explicitly.
+
+In the `Dockerfile` change:
 
 ```dockerfile
 FROM python:3.13-slim
@@ -20,9 +27,17 @@ To:
 FROM python:3.13-slim as backend
 ```
 
-## Writing your `docker-compose` file from terminal commands
+<div class="page"/>
 
-* `docker build` arguments goes to `build` entry on the service:
+## Create `docker-compose.yaml` from Docker Commands
+
+Create a `docker-compose.yaml` file and map the relevant parts of your existing
+Docker commands to its service.
+
+Alternatively, copy the working example provided in this same folder and adapt it to
+your project.
+
+* `docker build` arguments go under the service's `build` entry:
 
   ```sh
   docker build \
@@ -41,7 +56,9 @@ FROM python:3.13-slim as backend
   image: consultation-app         # Same as on the command line.
   ```
 
-* `docker run` ones goes to the service entry itself:
+<div class="page"/>
+
+* `docker run` options go on the service itself:
 
   ```sh
   docker run -p 8000:8000 \
@@ -55,7 +72,7 @@ FROM python:3.13-slim as backend
 
   ```yml
   backend:
-    container_name: SaaS_Backend  # Your preferred name so you don't get random ones.
+    container_name: SaaS_Backend  # Preferred name so you don't get random ones.
     build:
       ...                         # See above.
     image: consultation-app       # Same as on the command line.
@@ -69,34 +86,38 @@ FROM python:3.13-slim as backend
     platform: linux/amd64         # Ensure image creation for the right architecture.
   ```
 
-  *No matter you are running on a ARM MAC, it should work on emulation out of the box,
-  otherwise, well...\
-  maybe MACs are not that "fully compatible" as they claim.* 😉
+  The `platform` setting is useful when you need to build or run for a specific
+  architecture, such as `linux/amd64`, on an ARM-based Mac.
 
-## Build and run your service locally on one single command
+  *It should work through emulation out of the box. Otherwise, well... maybe Macs are
+  not as "fully compatible" as they claim.* 😉
 
-This command will build and run your service on your local docker engine.\
-*(Run it on the same folder)*
+<div class="page"/>
+
+## Build and Run Locally
+
+Run this command from the folder containing your Compose file:
 
 ```sh
 docker compose up -d --build
 ```
 
-* With the `--build` flag it will build the image if not already build or it detects
-  changes on files, then it will run it locally on your docker engine.
+* `--build` builds the image if it does not exist or if changes require a rebuild,
+  then starts the service.\
+  It is safe to include this flag every time.
 
-* The `-d` flag detaches execution, so your return back yo your terminal while the service
-  runs in background. Remove it if you prefer your terminal stick attached to the service
-  and see logs there.
+* `-d` runs the service in the background. Omit it to keep the logs attached to your
+  terminal.
 
-If your `.env` file is not located on the same folder use the `--env-file` flag.\
-*(Recommended for safety, specially if you use AI agents that read your whole workspace)*
+When `.env` is outside the workspace, pass its path with `--env-file`.\
+The path can be relative to the directory where you run the command,
+for example `../../.env`:
 
 ```sh
 docker compose --env-file path_to_env_file/.env up -d --build
 ```
 
-To stop down your service just run:
+To stop and remove the service, run:
 
 ```sh
 docker compose down
