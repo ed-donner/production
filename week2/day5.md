@@ -761,8 +761,16 @@ Now you need to apply the resources. The command differs depending on whether th
 
 If the grep/Select-String command above found nothing, the OIDC provider doesn't exist yet. Create it along with the IAM role:
 
-**⚠️ IMPORTANT**: Replace `YOUR_GITHUB_USERNAME` with your actual GitHub username.
-For example: if your GitHub username is 'johndoe', use: `johndoe/digital-twin`  
+**⚠️ IMPORTANT**: Replace `YOUR_GITHUB_USERNAME` with your actual GitHub username. Keep the string format same. If capitals involved, keep them same otherwise while deploying using Github Action, may face the issue 
+```bash
+Deploy to dev
+Could not assume role with OIDC: Not authorized to perform sts:AssumeRoleWithWebIdentity
+```
+
+For example: if your GitHub username is 
+
+1.'johndoe', use: `johndoe/digital-twin`
+2. 'AlexDavid' use: 'AlexDavid/digital-twin'
 **NOTE** Do not put a URL here - it should just be the Github username, not with "https://github.com/" at the front, or you will get cryptic errors!
 
 **Mac/Linux:**
