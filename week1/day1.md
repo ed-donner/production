@@ -21,33 +21,11 @@ This guide will walk you through deploying a simple FastAPI application to Verce
 
 > Note: You can use a different IDE if you prefer (VS Code, PyCharm, etc.), but these instructions assume you're using Cursor.
 
-**Windows:**
-1. Visit [https://cursor.com](https://cursor.com)
-2. Click "Download for Windows"
-3. Run the downloaded `.exe` installer
-4. Follow the installation wizard
-5. Launch Cursor from your Start Menu or Desktop
+1. Visit [Cursor Desktop QuickStart](https://cursor.com/docs/get-started/quickstart)
+2. Follow the first step "1. Install Cursor and sign in" for macOS, Windows or Linux
+4. If `AppImage` was downloaded, directly run it in the terminal: `/path/to/Cursor-*.AppImage`
+5. For the rest of systems the run can be done using native desktop launcher
 
-**Mac:**
-1. Visit [https://cursor.com](https://cursor.com)
-2. Click "Download for Mac"
-3. Open the downloaded `.dmg` file
-4. Drag Cursor to your Applications folder
-5. Launch Cursor from Applications or Spotlight (Cmd+Space, type "Cursor")
-
-**Linux:**
-1. Visit [https://cursor.com](https://cursor.com)
-2. Click "Download for Linux"
-3. Extract the `.tar.gz` file:
-   ```bash
-   tar -xzf cursor-*.tar.gz
-   ```
-4. Move to `/opt` and create a symlink:
-   ```bash
-   sudo mv cursor /opt/
-   sudo ln -s /opt/cursor/cursor /usr/local/bin/cursor
-   ```
-5. Launch by typing `cursor` in terminal
 
 ### Create Your Project Folder
 
