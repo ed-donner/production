@@ -1,0 +1,5 @@
+fastapi
+uvicorn
+openai
+fastapi-clerk-auth
+pydantic
