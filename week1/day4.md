@@ -150,6 +150,8 @@ export default function Document() {
 
 ## Step 4: Create the Consultation Form
 
+Note: the code below uses `<Show>` from version 7 of `@clerk/nextjs`, where the videos use `<Protect>`, `<SignedIn>` and `<SignedOut>`. See the note at the top of Day 3 for the details. If you're still on version 6, keep using the components from the videos.
+
 Replace `pages/product.tsx` with the new healthcare interface:
 
 ```typescript
@@ -162,7 +164,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import remarkBreaks from 'remark-breaks';
 import { fetchEventSource } from '@microsoft/fetch-event-source';
-import { Protect, PricingTable, UserButton } from '@clerk/nextjs';
+import { Show, PricingTable, UserButton } from '@clerk/nextjs';
 
 function ConsultationForm() {
     const { getToken } = useAuth();
@@ -301,8 +303,8 @@ export default function Product() {
             </div>
 
             {/* Subscription Protection */}
-            <Protect
-                plan="premium_subscription"
+            <Show
+                when={{ plan: 'premium_subscription' }}
                 fallback={
                     <div className="container mx-auto px-4 py-12">
                         <header className="text-center mb-12">
@@ -320,7 +322,7 @@ export default function Product() {
                 }
             >
                 <ConsultationForm />
-            </Protect>
+            </Show>
         </main>
     );
 }
@@ -334,7 +336,7 @@ Update `pages/index.tsx` to reflect the healthcare focus:
 "use client"
 
 import Link from 'next/link';
-import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
+import { SignInButton, Show, UserButton } from '@clerk/nextjs';
 
 export default function Home() {
   return (
@@ -346,14 +348,14 @@ export default function Home() {
             MediNotes Pro
           </h1>
           <div>
-            <SignedOut>
+            <Show when="signed-out">
               <SignInButton mode="modal">
                 <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors">
                   Sign In
                 </button>
               </SignInButton>
-            </SignedOut>
-            <SignedIn>
+            </Show>
+            <Show when="signed-in">
               <div className="flex items-center gap-4">
                 <Link 
                   href="/product" 
@@ -363,7 +365,7 @@ export default function Home() {
                 </Link>
                 <UserButton showName={true} />
               </div>
-            </SignedIn>
+            </Show>
           </div>
         </nav>
 
@@ -412,20 +414,20 @@ export default function Home() {
             </div>
           </div>
           
-          <SignedOut>
+          <Show when="signed-out">
             <SignInButton mode="modal">
               <button className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-4 px-8 rounded-xl text-lg transition-all transform hover:scale-105">
                 Start Free Trial
               </button>
             </SignInButton>
-          </SignedOut>
-          <SignedIn>
+          </Show>
+          <Show when="signed-in">
             <Link href="/product">
               <button className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-4 px-8 rounded-xl text-lg transition-all transform hover:scale-105">
                 Open Consultation Assistant
               </button>
             </Link>
-          </SignedIn>
+          </Show>
         </div>
 
         {/* Trust Indicators */}

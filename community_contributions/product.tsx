@@ -6,7 +6,7 @@ import remarkGfm from 'remark-gfm';
 import remarkBreaks from 'remark-breaks';
 import { useAuth } from '@clerk/nextjs';
 import { fetchEventSource } from '@microsoft/fetch-event-source';
-import { Protect, PricingTable, UserButton } from '@clerk/nextjs';
+import { Show, PricingTable, UserButton } from '@clerk/nextjs';
 
 function IdeaGenerator() {
     const { getToken } = useAuth();
@@ -157,8 +157,8 @@ export default function Product() {
             </div>
 
             {/* Subscription Protection */}
-            <Protect
-                plan="premium_subscription"
+            <Show
+                when={{ plan: 'premium_subscription' }}
                 fallback={
                     <div className="container mx-auto px-4 py-12">
                         <header className="text-center mb-12">
@@ -176,7 +176,7 @@ export default function Product() {
                 }
             >
                 <IdeaGenerator />
-            </Protect>
+            </Show>
         </main>
     );
 }

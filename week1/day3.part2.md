@@ -57,6 +57,8 @@ After creating the plan, you'll see a **Plan ID** in the top right of the plan c
 
 Since we're using Pages Router with client-side components, we need to protect our product route with the subscription check.
 
+Note: this code uses `<Show>` from version 7 of `@clerk/nextjs`, where the videos use `<Protect>`, `<SignedIn>` and `<SignedOut>`. See the note at the top of Part 1 for the details.
+
 Update `pages/product.tsx`:
 
 ```typescript
@@ -68,7 +70,7 @@ import remarkGfm from 'remark-gfm';
 import remarkBreaks from 'remark-breaks';
 import { useAuth } from '@clerk/nextjs';
 import { fetchEventSource } from '@microsoft/fetch-event-source';
-import { Protect, PricingTable, UserButton } from '@clerk/nextjs';
+import { Show, PricingTable, UserButton } from '@clerk/nextjs';
 
 function IdeaGenerator() {
     const { getToken } = useAuth();
@@ -142,8 +144,8 @@ export default function Product() {
             </div>
 
             {/* Subscription Protection */}
-            <Protect
-                plan="premium_subscription"
+            <Show
+                when={{ plan: 'premium_subscription' }}
                 fallback={
                     <div className="container mx-auto px-4 py-12">
                         <header className="text-center mb-12">
@@ -161,7 +163,7 @@ export default function Product() {
                 }
             >
                 <IdeaGenerator />
-            </Protect>
+            </Show>
         </main>
     );
 }
@@ -177,7 +179,7 @@ Update `pages/index.tsx`:
 "use client"
 
 import Link from 'next/link';
-import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
+import { SignInButton, Show, UserButton } from '@clerk/nextjs';
 
 export default function Home() {
   return (
@@ -189,14 +191,14 @@ export default function Home() {
             IdeaGen Pro
           </h1>
           <div>
-            <SignedOut>
+            <Show when="signed-out">
               <SignInButton mode="modal">
                 <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors">
                   Sign In
                 </button>
               </SignInButton>
-            </SignedOut>
-            <SignedIn>
+            </Show>
+            <Show when="signed-in">
               <div className="flex items-center gap-4">
                 <Link 
                   href="/product" 
@@ -206,7 +208,7 @@ export default function Home() {
                 </Link>
                 <UserButton showName={true} />
               </div>
-            </SignedIn>
+            </Show>
           </div>
         </nav>
 
@@ -232,20 +234,20 @@ export default function Home() {
             </ul>
           </div>
           
-          <SignedOut>
+          <Show when="signed-out">
             <SignInButton mode="modal">
               <button className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-4 px-8 rounded-xl text-lg transition-all transform hover:scale-105">
                 Start Your Free Trial
               </button>
             </SignInButton>
-          </SignedOut>
-          <SignedIn>
+          </Show>
+          <Show when="signed-in">
             <Link href="/product">
               <button className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-4 px-8 rounded-xl text-lg transition-all transform hover:scale-105">
                 Access Premium Features
               </button>
             </Link>
-          </SignedIn>
+          </Show>
         </div>
       </div>
     </main>
@@ -338,24 +340,24 @@ Your app now has:
 
 You can create multiple plans in Clerk Dashboard:
 ```typescript
-<Protect
-    plan={["basic_plan", "premium_plan", "enterprise_plan"]}
+<Show
+    when={(has) => has({ plan: 'basic_plan' }) || has({ plan: 'premium_plan' }) || has({ plan: 'enterprise_plan' })}
     fallback={<PricingTable />}
 >
     <IdeaGenerator />
-</Protect>
+</Show>
 ```
 
 ### Custom Pricing Table
 
 Instead of Clerk's default PricingTable, you can build your own:
 ```typescript
-<Protect
-    plan="premium_subscription"
+<Show
+    when={{ plan: 'premium_subscription' }}
     fallback={<CustomPricingPage />}
 >
     <IdeaGenerator />
-</Protect>
+</Show>
 ```
 
 ### Usage Limits

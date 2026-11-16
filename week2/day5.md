@@ -562,6 +562,8 @@ Write-Host "   terraform workspace delete $Environment" -ForegroundColor White
 
 As of August 2025, GitHub strongly recommends using OpenID Connect (OIDC) for AWS authentication. This is more secure than storing long-lived access keys.
 
+**Update for repositories created after 15 July 2026:** GitHub changed the format of the OIDC subject (`sub`) claim for new repositories. It now includes the numeric IDs of the owner and the repository, so instead of `repo:your-username/digital-twin:environment:dev` GitHub sends something like `repo:your-username@12345678/digital-twin@987654321:environment:dev`. The trust policy below accepts both formats. Details are in [GitHub's changelog](https://github.blog/changelog/2026-04-23-immutable-subject-claims-for-github-actions-oidc-tokens/).
+
 Create `terraform/github-oidc.tf`:
 
 ```hcl
@@ -571,6 +573,11 @@ Create `terraform/github-oidc.tf`:
 variable "github_repository" {
   description = "GitHub repository in format 'owner/repo'"
   type        = string
+}
+
+locals {
+  github_owner = split("/", var.github_repository)[0]
+  github_repo  = split("/", var.github_repository)[1]
 }
 
 # Note: aws_caller_identity.current is already defined in main.tf
@@ -610,7 +617,12 @@ resource "aws_iam_role" "github_actions" {
             "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
           }
           StringLike = {
-            "token.actions.githubusercontent.com:sub" = "repo:${var.github_repository}:*"
+            "token.actions.githubusercontent.com:sub" = [
+              # Repos created before 15 July 2026: repo:owner/repo:...
+              "repo:${var.github_repository}:*",
+              # Repos created after 15 July 2026: repo:owner@ID/repo@ID:...
+              "repo:${local.github_owner}@*/${local.github_repo}@*:*"
+            ]
           }
         }
       }
@@ -1080,6 +1092,8 @@ Since we pushed to the main branch, GitHub Actions should automatically trigger 
 3. You should see "Deploy Digital Twin" workflow running
 4. Click on it to watch the progress
 5. Wait for completion (5-10 minutes)
+
+If the **Configure AWS credentials** step fails with `Not authorized to perform sts:AssumeRoleWithWebIdentity`, see "Could not assume role" in the Troubleshooting section at the end of this guide.
 
 Once the deployment completes successfully:
 
@@ -1757,10 +1771,20 @@ All Managed by:
 
 ### GitHub Actions Failures
 
-**"Could not assume role"**
+**"Could not assume role"** or **"Not authorized to perform sts:AssumeRoleWithWebIdentity"**
 - Check AWS_ROLE_ARN secret is correct
 - Verify GitHub repository name matches OIDC configuration
 - Ensure role trust policy is correct
+- If your GitHub repository was created after 15 July 2026 and you created the IAM role with an older version of these instructions, the trust policy won't match GitHub's new `sub` format. Fix the existing role in the AWS Console:
+  1. Go to **IAM** → **Roles** → `github-actions-twin-deploy` → **Trust relationships** → **Edit trust policy**
+  2. In the `StringLike` section, replace the `token.actions.githubusercontent.com:sub` line with this (using your own username and repo name):
+     ```json
+     "token.actions.githubusercontent.com:sub": [
+       "repo:YOUR_GITHUB_USERNAME/digital-twin:*",
+       "repo:YOUR_GITHUB_USERNAME@*/digital-twin@*:*"
+     ]
+     ```
+  3. Click **Update policy**, then re-run the workflow
 
 **"Terraform state lock"**
 - Someone else might be deploying

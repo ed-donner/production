@@ -217,7 +217,7 @@ saas/
 
 **Important Architecture Change**: On Vercel, our Next.js app could make server-side requests. For AWS simplicity, we'll export Next.js as static HTML/JS files and serve them from our Python backend. This means everything runs in one container — and that one container will run on Lambda.
 
-**Note about Middleware**: With Pages Router, we don't use middleware files. Authentication is handled entirely by Clerk's client-side components (`<Protect>`, `<SignedIn>`, etc.) which work perfectly with static exports.
+**Note about Middleware**: With Pages Router, we don't use middleware files. Authentication is handled entirely by Clerk's client-side components (`<Show>`, `<SignInButton>`, etc.) which work perfectly with static exports.
 
 Update `next.config.ts`:
 

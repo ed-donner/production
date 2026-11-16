@@ -22,6 +22,15 @@ An authenticated version of your app that:
 
 In some situations, if your app takes longer than 60 seconds to respond to a request, it's possible that you experience a Timeout error. You'll see in the browser's Javascript Console that you're getting a 403 error. The fix for this is in community_contributions explained in the file jwt_token_60s_fix.md. Look out for this 403 timeout after 60 seconds, and if it happens, please see the fix. Thanks!
 
+Also: in March 2026, Clerk released version 7 of `@clerk/nextjs`. It removed the `<SignedIn>`, `<SignedOut>` and `<Protect>` components that you'll see in the videos, and replaced them with a single component called `<Show>`. The code on this page and in Part 2 has been updated for version 7, so it's a little different from the videos:
+
+- `<SignedIn>` is now `<Show when="signed-in">`
+- `<SignedOut>` is now `<Show when="signed-out">`
+- `<Protect plan="premium_subscription">` (in Part 2) is now `<Show when={{ plan: 'premium_subscription' }}>`
+- `<UserButton afterSignOutUrl="/" />` is now `<UserButton />`
+
+You can check which version you have with `npm list @clerk/nextjs`. If you already installed version 6 (for example with `npm install @clerk/nextjs@6.39.0`) and it's working, that's fine too: keep using the code from the videos, because version 6 doesn't have `<Show>`.
+
 
 ## Part 1: User Authentication
 
@@ -45,13 +54,13 @@ You'll see the Clerk dashboard with your API keys displayed.
 
 ### Step 3: Install Clerk Dependencies
 
-In your terminal, install the Clerk SDK of v6 like `6.39.0`:
+In your terminal, install the Clerk SDK:
 
 ```bash
-npm install @clerk/nextjs@6.39.0
+npm install @clerk/nextjs
 ```
 
-Side note: The latest `@clerk/nextjs` version as of Mar 6, 2026 is 7.0.1.  The version 7.0.1 removed `SignedIn` and `SignedOut` calls that are required in the `page/index.tsx` of our `saas` project.  If you have already installed the latest `@clerk/nextjs` and saw the error `those components are not found` shown in red underlined, please confirm the version installed with the following first line and you should see the result as expected.
+This installs version 7 or later, which the code on this page is written for (see the note at the top of this page).
 
 For handling streaming with authentication, also install:
 
@@ -182,7 +191,7 @@ Update `pages/index.tsx` to be your new landing page with sign-in:
 "use client"
 
 import Link from 'next/link';
-import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
+import { SignInButton, Show, UserButton } from '@clerk/nextjs';
 
 export default function Home() {
   return (
@@ -194,14 +203,14 @@ export default function Home() {
             IdeaGen
           </h1>
           <div>
-            <SignedOut>
+            <Show when="signed-out">
               <SignInButton mode="modal">
                 <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors">
                   Sign In
                 </button>
               </SignInButton>
-            </SignedOut>
-            <SignedIn>
+            </Show>
+            <Show when="signed-in">
               <div className="flex items-center gap-4">
                 <Link 
                   href="/product" 
@@ -209,9 +218,9 @@ export default function Home() {
                 >
                   Go to App
                 </Link>
-                <UserButton afterSignOutUrl="/" />
+                <UserButton />
               </div>
-            </SignedIn>
+            </Show>
           </div>
         </nav>
 
@@ -226,20 +235,20 @@ export default function Home() {
             Harness the power of AI to discover innovative business opportunities tailored for the AI agent economy
           </p>
           
-          <SignedOut>
+          <Show when="signed-out">
             <SignInButton mode="modal">
               <button className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-4 px-8 rounded-xl text-lg transition-all transform hover:scale-105">
                 Get Started Free
               </button>
             </SignInButton>
-          </SignedOut>
-          <SignedIn>
+          </Show>
+          <Show when="signed-in">
             <Link href="/product">
               <button className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-4 px-8 rounded-xl text-lg transition-all transform hover:scale-105">
                 Generate Ideas Now
               </button>
             </Link>
-          </SignedIn>
+          </Show>
         </div>
       </div>
     </main>
@@ -346,7 +355,7 @@ vercel --prod
 
 Visit your production URL and test the complete authentication flow!
 
-NOTE - if you hit a problem with jwt token expiration, please see this [fix contributed by Artur P](../community_contributions/arturp_jwt_token_fix_notes.md)
+NOTE - if you hit a problem with jwt token expiration, please see this [fix contributed by Artur P](../community_contributions/jwt_token_60s_fix.md)
 
 ## What's Happening?
 
