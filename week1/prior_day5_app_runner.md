@@ -220,7 +220,7 @@ saas/
 **Important Architecture Change**: On Vercel, our Next.js app could make server-side requests. For AWS simplicity, we'll export Next.js as static HTML/JS files and serve them from our Python backend. This means everything runs in one container!
 
 **Note about Middleware**: 
-With Pages Router, we don't use middleware files. Authentication is handled entirely by Clerk's client-side components (`<Protect>`, `<SignedIn>`, etc.) which work perfectly with static exports.
+**Note about Middleware**: With Pages Router, we don't use middleware files. Authentication is handled on the client with Clerk (`useAuth()` for signed-in and plan checks). Clerk Core 3 removed `<Protect>` and `<SignedIn>` — see [clerk_core3_signedin_signedout.md](../community_contributions/clerk_core3_signedin_signedout.md). If you use `CLERK_PUBLISHABLE_KEY` instead of `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`, keep the `next.config.ts` `env` inline from Day 3 so the key is still baked into the static export.
 
 Update `next.config.ts`:
 
