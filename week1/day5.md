@@ -57,17 +57,22 @@ The **Lambda Web Adapter** is an open-source Lambda extension from AWS Labs. By 
 
 ### Step 1: Sign Up for AWS
 
-1. Visit [aws.amazon.com](https://aws.amazon.com)
-2. Click **Create an AWS Account**
-3. Enter your email and choose a password
-4. Select **Personal** account type, but not "free tier" - see note below
-5. Enter payment information (required, but we'll set up cost alerts)
-6. Verify your phone number via SMS
-7. Select **Basic Support - Free**
+**This section is changed due to the new AWS sign-up (November 2026).** AWS is rolling out a new simplified sign-up, where you log in with Google, GitHub, Apple or Amazon, or with an email address. An account created this way has limited access to AWS. You can't create IAM users who sign in to the console, you can't create the user group in Step 5, and some services aren't available. It won't work for this course, so please use the advanced sign-up described here.
+
+1. Go to the advanced sign-up page: [https://signin.aws.amazon.com/signup?request_type=register](https://signin.aws.amazon.com/signup?request_type=register). It's headed **Sign up for AWS (advanced)** and asks for a **Root user email address**. If you end up on the new sign-up page instead (the one with the Google, GitHub, Apple and Amazon buttons), scroll to the bottom and click **Continue with advanced features**.
+2. Enter your email address and an AWS account name, click **Verify email address**, and enter the code AWS emails you
+3. Choose a password for your root user
+4. When asked to choose an account plan, choose the **Paid plan**, not the Free plan - see note below
+5. Select **Personal** account type
+6. Enter payment information (required, but we'll set up cost alerts)
+7. Verify your phone number via SMS
+8. Select **Basic Support - Free**
 
 You now have an AWS root account. This is like having admin access — powerful but dangerous!
 
-> There's an option for first time users of AWS to select the "free tier" of AWS. Don't choose this! It only has limited access to AWS services. It would work for today's projects, but it might not support future projects. This doesn't mean that you need to pay a subscription or pay for support; just that you need to enter payment details and not be in a sandbox environment.
+> When AWS asks you to choose an account plan, don't choose the Free plan. It only has limited access to AWS services. It would work for today's projects, but it might not support future projects. Choosing the Paid plan doesn't mean that you need to pay a subscription or pay for support; just that you need to enter payment details and not be in a sandbox environment. New accounts get free credits that should more than cover this course, but always keep an eye on the budgets you set up in Step 3.
+
+> **Already signed up the simplified way?** You'll know if you logged in with Google, GitHub, Apple or Amazon, if the console organizes your work into projects, or if Step 5 won't let you create a user group. The quickest fix is to open a second account with the advanced sign-up above. AWS does have a way to convert a simplified account (called "activate advanced features"), but it's tricky, it can't be undone, and the account you end up with is set up differently from the one this course uses.
 
 ### Step 2: Secure Your Root Account
 
@@ -113,6 +118,8 @@ You now have an AWS root account. This is like having admin access — powerful 
 If you hit $10, stop and review what's running.
 
 ### Step 4: Create an IAM User for Daily Work
+
+> If AWS won't let you create this user with console access, or won't let you create the user group in Step 5, your account was made with the new simplified sign-up. See the note at the end of Step 1.
 
 Never use your root account for daily work. Let's create a limited user:
 
